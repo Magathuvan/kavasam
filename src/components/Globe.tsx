@@ -26,7 +26,7 @@ export function Globe() {
       ((i * 37) % 120 - 60) * (Math.PI / 180),
       ((i * 83) % 360) * (Math.PI / 180),
     ]);
-    const arcs = Array.from({ length: 10 }, (_, i) => [i, (i * 5 + 3) % nodes.length]);
+    const arcs: [number, number][] = Array.from({ length: 10 }, (_, i) => [i, (i * 5 + 3) % nodes.length]);
 
     let raf = 0;
     let rot = 0;
