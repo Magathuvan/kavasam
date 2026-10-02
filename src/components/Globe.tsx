@@ -94,6 +94,7 @@ export function Globe() {
 
       arcs.forEach(([a, b], i) => {
         const A = nodes[a], B = nodes[b];
+        if (!A || !B) return;
         ctx.beginPath();
         let vis = 0;
         const steps = 40;
