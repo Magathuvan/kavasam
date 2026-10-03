@@ -81,7 +81,7 @@ export async function inspectUrl(raw: string): Promise<string> {
 }
 
 export function streamAnalysis(tool: ToolId, input: string, signal: AbortSignal) {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) throw new Error("AI is not configured.");
   const provider = createOpenAI({
     baseURL: "https://ai.gateway.lovable.dev/v1",
