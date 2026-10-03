@@ -31,11 +31,14 @@ export function SiteHeader() {
               </a>
               {item.children && (
                 <div className="invisible absolute left-0 top-full w-64 translate-y-1 rounded-lg border border-border bg-popover p-2 opacity-0 shadow-card transition-all group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                  {item.children.map((c) => (
-                    <a key={c} href={item.href} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-secondary hover:text-navy">
-                      {c}
+                  {item.children.map((c) => {
+                    const [label, href] = typeof c === "string" ? [c, item.href] : c;
+                    return (
+                    <a key={label} href={href} className="block rounded-md px-3 py-2 text-sm text-charcoal hover:bg-secondary hover:text-navy">
+                      {label}
                     </a>
-                  ))}
+                  );
+                  })}
                 </div>
               )}
             </div>
@@ -45,7 +48,7 @@ export function SiteHeader() {
           <button aria-label="Search" className="rounded-md p-2 text-charcoal hover:bg-secondary">
             <Search className="h-4.5 w-4.5" />
           </button>
-          <a href="#contact" className="hidden rounded-md bg-navy px-4 py-2 text-sm font-bold text-navy-foreground transition-colors hover:bg-navy-soft sm:inline-flex">
+          <a href="/#contact" className="hidden rounded-md bg-navy px-4 py-2 text-sm font-bold text-navy-foreground transition-colors hover:bg-navy-soft sm:inline-flex">
             Get Started
           </a>
           <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)} className="rounded-md p-2 text-navy lg:hidden">
@@ -60,7 +63,7 @@ export function SiteHeader() {
               {item.label}
             </a>
           ))}
-          <a href="#contact" className="mt-3 block rounded-md bg-navy px-4 py-3 text-center font-bold text-navy-foreground">Get Started</a>
+          <a href="/#contact" className="mt-3 block rounded-md bg-navy px-4 py-3 text-center font-bold text-navy-foreground">Get Started</a>
         </nav>
       )}
     </header>
