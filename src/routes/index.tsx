@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Bot, Gavel, HeartPulse, Play, Radar, ShieldAlert, Wrench } from "lucide-react";
 import { Globe } from "@/components/Globe";
