@@ -114,3 +114,12 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+.prose-kavasam h1, .prose-kavasam h2, .prose-kavasam h3 { color: var(--navy); font-weight: 800; margin: 1.4em 0 0.5em; font-size: 1.05rem; }
+.prose-kavasam p { margin: 0.6em 0; }
+.prose-kavasam ul, .prose-kavasam ol { margin: 0.5em 0; padding-left: 1.25rem; }
+.prose-kavasam ul { list-style: disc; }
+.prose-kavasam ol { list-style: decimal; }
+.prose-kavasam li { margin: 0.25em 0; }
+.prose-kavasam strong { color: var(--navy); }
+.prose-kavasam a { color: var(--gold-deep); text-decoration: underline; }

@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 import { ArrowRight, Bot, Gavel, HeartPulse, Play, Radar, ShieldAlert, Wrench } from "lucide-react";
 import { Globe } from "@/components/Globe";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -33,18 +34,20 @@ const strip = [
 ];
 
 const cards = [
-  { icon: Bot, title: "AI Cyber Assistant", desc: "Ask cybersecurity questions and receive practical AI-powered guidance.", cta: "Try KAVASAM AI" },
-  { icon: HeartPulse, title: "AI Cyber Health Check", desc: "Analyze digital security risks and receive actionable recommendations.", cta: "Run Health Check" },
-  { icon: ShieldAlert, title: "Scam Detector", desc: "Analyze suspicious messages, emails, links, and potential scams.", cta: "Check for Scam" },
-  { icon: Gavel, title: "Cyber Law Hub", desc: "Explore cybersecurity laws, regulations, rights, and reporting information.", cta: "Explore Cyber Law" },
-  { icon: Radar, title: "Threat Intelligence", desc: "Explore current cybersecurity threats and security intelligence.", cta: "View Threat Intelligence" },
-  { icon: Wrench, title: "Security Tools", desc: "Access practical cybersecurity analysis tools.", cta: "Explore Tools" },
+  { icon: Bot, title: "AI Cyber Assistant", desc: "Ask cybersecurity questions and receive practical AI-powered guidance.", cta: "Try KAVASAM AI", to: "/tools/assistant" },
+  { icon: HeartPulse, title: "AI Cyber Health Check", desc: "Analyze digital security risks and receive actionable recommendations.", cta: "Run Health Check", to: "/tools/health-check" },
+  { icon: ShieldAlert, title: "Scam Detector", desc: "Analyze suspicious messages, emails, links, and potential scams.", cta: "Check for Scam", to: "/tools/scam-detector" },
+  { icon: Gavel, title: "Cyber Law Hub", desc: "Explore cybersecurity laws, regulations, rights, and reporting information.", cta: "Explore Cyber Law", to: "/tools/legal-analyzer" },
+  { icon: Radar, title: "Threat Intelligence", desc: "Explore current cybersecurity threats and security intelligence.", cta: "View Threat Intelligence", to: "/tools" },
+  { icon: Wrench, title: "Security Tools", desc: "Access practical cybersecurity analysis tools.", cta: "Explore Tools", to: "/tools" },
 ];
 
 const individuals = ["Scam protection", "Digital safety", "AI cybersecurity assistant", "Cyber law information", "Suspicious link & message analysis", "Security education"];
 const businesses = ["Penetration testing", "Vulnerability assessment", "Security audits", "Application security", "Cloud security", "Threat intelligence", "Consulting", "Employee security training"];
 
 function Index() {
+  const navigate = useNavigate();
+  const [q, setQ] = useState("");
   return (
     <div id="top" className="min-h-screen bg-background">
       <SiteHeader />
@@ -106,8 +109,8 @@ function Index() {
               Security intelligence for the digital world.
             </h2>
             <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {cards.map(({ icon: Icon, title, desc, cta }) => (
-                <a key={title} href="#ai" className="group flex flex-col rounded-xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-gold/60">
+              {cards.map(({ icon: Icon, title, desc, cta, to }) => (
+                <a key={title} href={to} className="group flex flex-col rounded-xl border border-border bg-card p-7 shadow-card transition-all hover:-translate-y-1 hover:border-gold/60">
                   <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-gold">
                     <Icon className="h-5 w-5" />
                   </span>
@@ -130,10 +133,12 @@ function Index() {
               Cybersecurity intelligence, available when you need it.
             </h2>
             <p className="mt-4 text-navy-foreground/60">No account needed. Create one later to save your results.</p>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-12 rounded-2xl border border-navy-foreground/10 bg-navy-soft p-6 text-left sm:p-8">
+            <form onSubmit={(e) => { e.preventDefault(); if (q.trim()) navigate({ to: "/tools/$toolId", params: { toolId: "assistant" }, search: { q } }); }} className="mt-12 rounded-2xl border border-navy-foreground/10 bg-navy-soft p-6 text-left sm:p-8">
               <label htmlFor="ask" className="text-xl font-bold">What would you like to secure?</label>
               <textarea
                 id="ask"
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
                 rows={4}
                 placeholder="Ask a cybersecurity question, analyze a suspicious message, URL, email, or security concern..."
                 className="mt-4 w-full resize-none rounded-lg border border-navy-foreground/15 bg-navy p-4 text-sm text-navy-foreground placeholder:text-navy-foreground/40 focus:border-gold focus:outline-none"
