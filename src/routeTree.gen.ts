@@ -10,7 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResearchRouteImport } from './routes/research'
+import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as ThreatIntelligenceRouteImport } from './routes/threat-intelligence'
+import { Route as AcademyIndexRouteImport } from './routes/academy.index'
+import { Route as AcademySlugRouteImport } from './routes/academy.$slug'
 import { Route as ApiAnalyzeRouteImport } from './routes/api/analyze'
+import { Route as CyberLawIndexRouteImport } from './routes/cyber-law.index'
+import { Route as CyberLawSlugRouteImport } from './routes/cyber-law.$slug'
 import { Route as ToolsIndexRouteImport } from './routes/tools.index'
 import { Route as ToolsToolIdRouteImport } from './routes/tools.$toolId'
 
@@ -19,9 +26,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThreatIntelligenceRoute = ThreatIntelligenceRouteImport.update({
+  id: '/threat-intelligence',
+  path: '/threat-intelligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyIndexRoute = AcademyIndexRouteImport.update({
+  id: '/academy/',
+  path: '/academy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademySlugRoute = AcademySlugRouteImport.update({
+  id: '/academy/$slug',
+  path: '/academy/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAnalyzeRoute = ApiAnalyzeRouteImport.update({
   id: '/api/analyze',
   path: '/api/analyze',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CyberLawIndexRoute = CyberLawIndexRouteImport.update({
+  id: '/cyber-law/',
+  path: '/cyber-law/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CyberLawSlugRoute = CyberLawSlugRouteImport.update({
+  id: '/cyber-law/$slug',
+  path: '/cyber-law/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsIndexRoute = ToolsIndexRouteImport.update({
@@ -37,35 +79,97 @@ const ToolsToolIdRoute = ToolsToolIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/research': typeof ResearchRoute
+  '/solutions': typeof SolutionsRoute
+  '/threat-intelligence': typeof ThreatIntelligenceRoute
+  '/academy/$slug': typeof AcademySlugRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/cyber-law/$slug': typeof CyberLawSlugRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/academy/': typeof AcademyIndexRoute
+  '/cyber-law/': typeof CyberLawIndexRoute
   '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/research': typeof ResearchRoute
+  '/solutions': typeof SolutionsRoute
+  '/threat-intelligence': typeof ThreatIntelligenceRoute
+  '/academy/$slug': typeof AcademySlugRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/cyber-law/$slug': typeof CyberLawSlugRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/academy': typeof AcademyIndexRoute
+  '/cyber-law': typeof CyberLawIndexRoute
   '/tools': typeof ToolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/research': typeof ResearchRoute
+  '/solutions': typeof SolutionsRoute
+  '/threat-intelligence': typeof ThreatIntelligenceRoute
+  '/academy/$slug': typeof AcademySlugRoute
   '/api/analyze': typeof ApiAnalyzeRoute
+  '/cyber-law/$slug': typeof CyberLawSlugRoute
   '/tools/$toolId': typeof ToolsToolIdRoute
+  '/academy/': typeof AcademyIndexRoute
+  '/cyber-law/': typeof CyberLawIndexRoute
   '/tools/': typeof ToolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/analyze' | '/tools/$toolId' | '/tools/'
+  fullPaths:
+    | '/'
+    | '/research'
+    | '/solutions'
+    | '/threat-intelligence'
+    | '/academy/$slug'
+    | '/api/analyze'
+    | '/cyber-law/$slug'
+    | '/tools/$toolId'
+    | '/academy/'
+    | '/cyber-law/'
+    | '/tools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/analyze' | '/tools/$toolId' | '/tools'
-  id: '__root__' | '/' | '/api/analyze' | '/tools/$toolId' | '/tools/'
+  to:
+    | '/'
+    | '/research'
+    | '/solutions'
+    | '/threat-intelligence'
+    | '/academy/$slug'
+    | '/api/analyze'
+    | '/cyber-law/$slug'
+    | '/tools/$toolId'
+    | '/academy'
+    | '/cyber-law'
+    | '/tools'
+  id:
+    | '__root__'
+    | '/'
+    | '/research'
+    | '/solutions'
+    | '/threat-intelligence'
+    | '/academy/$slug'
+    | '/api/analyze'
+    | '/cyber-law/$slug'
+    | '/tools/$toolId'
+    | '/academy/'
+    | '/cyber-law/'
+    | '/tools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ResearchRoute: typeof ResearchRoute
+  SolutionsRoute: typeof SolutionsRoute
+  ThreatIntelligenceRoute: typeof ThreatIntelligenceRoute
+  AcademySlugRoute: typeof AcademySlugRoute
   ApiAnalyzeRoute: typeof ApiAnalyzeRoute
+  CyberLawSlugRoute: typeof CyberLawSlugRoute
   ToolsToolIdRoute: typeof ToolsToolIdRoute
+  AcademyIndexRoute: typeof AcademyIndexRoute
+  CyberLawIndexRoute: typeof CyberLawIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
 }
 
@@ -78,11 +182,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/threat-intelligence': {
+      id: '/threat-intelligence'
+      path: '/threat-intelligence'
+      fullPath: '/threat-intelligence'
+      preLoaderRoute: typeof ThreatIntelligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/': {
+      id: '/academy/'
+      path: '/academy'
+      fullPath: '/academy/'
+      preLoaderRoute: typeof AcademyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/$slug': {
+      id: '/academy/$slug'
+      path: '/academy/$slug'
+      fullPath: '/academy/$slug'
+      preLoaderRoute: typeof AcademySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/analyze': {
       id: '/api/analyze'
       path: '/api/analyze'
       fullPath: '/api/analyze'
       preLoaderRoute: typeof ApiAnalyzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cyber-law/': {
+      id: '/cyber-law/'
+      path: '/cyber-law'
+      fullPath: '/cyber-law/'
+      preLoaderRoute: typeof CyberLawIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cyber-law/$slug': {
+      id: '/cyber-law/$slug'
+      path: '/cyber-law/$slug'
+      fullPath: '/cyber-law/$slug'
+      preLoaderRoute: typeof CyberLawSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/': {
@@ -104,8 +257,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ResearchRoute: ResearchRoute,
+  SolutionsRoute: SolutionsRoute,
+  ThreatIntelligenceRoute: ThreatIntelligenceRoute,
+  AcademySlugRoute: AcademySlugRoute,
   ApiAnalyzeRoute: ApiAnalyzeRoute,
+  CyberLawSlugRoute: CyberLawSlugRoute,
   ToolsToolIdRoute: ToolsToolIdRoute,
+  AcademyIndexRoute: AcademyIndexRoute,
+  CyberLawIndexRoute: CyberLawIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
 }
 export const routeTree = rootRouteImport
