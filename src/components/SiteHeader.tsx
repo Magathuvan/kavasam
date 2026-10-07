@@ -48,7 +48,7 @@ export function SiteHeader() {
           <button aria-label="Search" className="rounded-md p-2 text-charcoal hover:bg-secondary">
             <Search className="h-4.5 w-4.5" />
           </button>
-          <a href="/#contact" className="hidden rounded-md bg-navy px-4 py-2 text-sm font-bold text-navy-foreground transition-colors hover:bg-navy-soft sm:inline-flex">
+          <a href="/contact" className="hidden rounded-md bg-navy px-4 py-2 text-sm font-bold text-navy-foreground transition-colors hover:bg-navy-soft sm:inline-flex">
             Get Started
           </a>
           <button aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)} className="rounded-md p-2 text-navy lg:hidden">
@@ -63,7 +63,7 @@ export function SiteHeader() {
               {item.label}
             </a>
           ))}
-          <a href="/#contact" className="mt-3 block rounded-md bg-navy px-4 py-3 text-center font-bold text-navy-foreground">Get Started</a>
+          <a href="/contact" className="mt-3 block rounded-md bg-navy px-4 py-3 text-center font-bold text-navy-foreground">Get Started</a>
         </nav>
       )}
     </header>
