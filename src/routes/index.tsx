@@ -37,9 +37,9 @@ const cards = [
   { icon: Bot, title: "AI Cyber Assistant", desc: "Ask cybersecurity questions and receive practical AI-powered guidance.", cta: "Try KAVASAM AI", to: "/tools/assistant" },
   { icon: HeartPulse, title: "AI Cyber Health Check", desc: "Analyze digital security risks and receive actionable recommendations.", cta: "Run Health Check", to: "/tools/health-check" },
   { icon: ShieldAlert, title: "Scam Detector", desc: "Analyze suspicious messages, emails, links, and potential scams.", cta: "Check for Scam", to: "/tools/scam-detector" },
-  { icon: Gavel, title: "Cyber Law Hub", desc: "Explore cybersecurity laws, regulations, rights, and reporting information.", cta: "Explore Cyber Law", to: "/tools/legal-analyzer" },
-  { icon: Radar, title: "Threat Intelligence", desc: "Explore current cybersecurity threats and security intelligence.", cta: "View Threat Intelligence", to: "/tools" },
-  { icon: Wrench, title: "Security Tools", desc: "Access practical cybersecurity analysis tools.", cta: "Explore Tools", to: "/tools" },
+  { icon: Gavel, title: "Cyber Law Hub", desc: "Explore cybersecurity laws, regulations, rights, and reporting information.", cta: "Explore Cyber Law", to: "/cyber-law" },
+  { icon: Radar, title: "Threat Intelligence", desc: "Explore current cybersecurity threats and security intelligence.", cta: "View Threat Intelligence", to: "/threat-intelligence" },
+  { icon: Wrench, title: "Security Tools", desc: "Access practical cybersecurity analysis tools.", cta: "Explore Tools", to: "/security-tools" },
 ];
 
 const individuals = ["Scam protection", "Digital safety", "AI cybersecurity assistant", "Cyber law information", "Suspicious link & message analysis", "Security education"];
@@ -169,7 +169,7 @@ function Index() {
               <ul className="mt-8 grid gap-3 sm:grid-cols-2">
                 {businesses.map((i) => <li key={i} className="flex items-center gap-2.5 text-sm text-navy-foreground/80"><span className="h-1.5 w-1.5 rounded-full bg-gold" />{i}</li>)}
               </ul>
-              <a id="contact" href="#contact" className="mt-10 inline-flex items-center gap-2 rounded-md bg-gold-gradient px-6 py-3.5 text-sm font-bold tracking-wide text-gold-foreground">
+              <a href="/solutions" className="mt-10 inline-flex items-center gap-2 rounded-md bg-gold-gradient px-6 py-3.5 text-sm font-bold tracking-wide text-gold-foreground">
                 PROTECT YOUR BUSINESS <ArrowRight className="h-4 w-4" />
               </a>
             </div>
