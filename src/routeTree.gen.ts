@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as ResponsibleDisclosureRouteImport } from './routes/responsible-disclosure'
+import { Route as SecurityToolsRouteImport } from './routes/security-tools'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as ThreatIntelligenceRouteImport } from './routes/threat-intelligence'
 import { Route as AcademyIndexRouteImport } from './routes/academy.index'
@@ -26,9 +30,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
   path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResponsibleDisclosureRoute = ResponsibleDisclosureRouteImport.update({
+  id: '/responsible-disclosure',
+  path: '/responsible-disclosure',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityToolsRoute = SecurityToolsRouteImport.update({
+  id: '/security-tools',
+  path: '/security-tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SolutionsRoute = SolutionsRouteImport.update({
@@ -79,7 +103,11 @@ const ToolsToolIdRoute = ToolsToolIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/research': typeof ResearchRoute
+  '/responsible-disclosure': typeof ResponsibleDisclosureRoute
+  '/security-tools': typeof SecurityToolsRoute
   '/solutions': typeof SolutionsRoute
   '/threat-intelligence': typeof ThreatIntelligenceRoute
   '/academy/$slug': typeof AcademySlugRoute
@@ -92,7 +120,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/research': typeof ResearchRoute
+  '/responsible-disclosure': typeof ResponsibleDisclosureRoute
+  '/security-tools': typeof SecurityToolsRoute
   '/solutions': typeof SolutionsRoute
   '/threat-intelligence': typeof ThreatIntelligenceRoute
   '/academy/$slug': typeof AcademySlugRoute
@@ -106,7 +138,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
   '/research': typeof ResearchRoute
+  '/responsible-disclosure': typeof ResponsibleDisclosureRoute
+  '/security-tools': typeof SecurityToolsRoute
   '/solutions': typeof SolutionsRoute
   '/threat-intelligence': typeof ThreatIntelligenceRoute
   '/academy/$slug': typeof AcademySlugRoute
@@ -121,7 +157,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/contact'
     | '/research'
+    | '/responsible-disclosure'
+    | '/security-tools'
     | '/solutions'
     | '/threat-intelligence'
     | '/academy/$slug'
@@ -134,7 +174,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/contact'
     | '/research'
+    | '/responsible-disclosure'
+    | '/security-tools'
     | '/solutions'
     | '/threat-intelligence'
     | '/academy/$slug'
@@ -147,7 +191,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
+    | '/contact'
     | '/research'
+    | '/responsible-disclosure'
+    | '/security-tools'
     | '/solutions'
     | '/threat-intelligence'
     | '/academy/$slug'
@@ -161,7 +209,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
   ResearchRoute: typeof ResearchRoute
+  ResponsibleDisclosureRoute: typeof ResponsibleDisclosureRoute
+  SecurityToolsRoute: typeof SecurityToolsRoute
   SolutionsRoute: typeof SolutionsRoute
   ThreatIntelligenceRoute: typeof ThreatIntelligenceRoute
   AcademySlugRoute: typeof AcademySlugRoute
@@ -182,11 +234,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/research': {
       id: '/research'
       path: '/research'
       fullPath: '/research'
       preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/responsible-disclosure': {
+      id: '/responsible-disclosure'
+      path: '/responsible-disclosure'
+      fullPath: '/responsible-disclosure'
+      preLoaderRoute: typeof ResponsibleDisclosureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security-tools': {
+      id: '/security-tools'
+      path: '/security-tools'
+      fullPath: '/security-tools'
+      preLoaderRoute: typeof SecurityToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/solutions': {
@@ -257,7 +337,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
   ResearchRoute: ResearchRoute,
+  ResponsibleDisclosureRoute: ResponsibleDisclosureRoute,
+  SecurityToolsRoute: SecurityToolsRoute,
   SolutionsRoute: SolutionsRoute,
   ThreatIntelligenceRoute: ThreatIntelligenceRoute,
   AcademySlugRoute: AcademySlugRoute,
