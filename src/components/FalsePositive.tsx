@@ -20,7 +20,7 @@ export function useFlagCounts(feed: Feed, indicators: string[]) {
   return { counts, bump };
 }
 
-export function FlagButton({ feed, indicator, count, onFlagged }: { feed: Feed; indicator: string; count?: { flags: number; status: string }; onFlagged: () => void }) {
+export function FlagButton({ feed, indicator, count, onFlagged }: { feed: Feed; indicator: string; count?: { flags: number; status: string } | undefined; onFlagged: () => void }) {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
