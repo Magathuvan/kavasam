@@ -44,12 +44,46 @@ export type Database = {
         }
         Relationships: []
       }
+      threat_flags: {
+        Row: {
+          created_at: string
+          feed: string
+          id: string
+          indicator: string
+          reason: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          feed: string
+          id?: string
+          indicator: string
+          reason?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          feed?: string
+          id?: string
+          indicator?: string
+          reason?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      threat_flag_counts: {
+        Args: { _feed: string; _indicators: string[] }
+        Returns: {
+          flags: number
+          indicator: string
+          status: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
