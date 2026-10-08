@@ -123,7 +123,7 @@ function Tools() {
         <section className="rounded-2xl bg-navy p-8 text-navy-foreground">
           <h2 className="text-xl font-extrabold">AI-powered checks</h2>
           <ul className="mt-5 space-y-3">
-            {[["scam-detector", "Scam Detector"], ["url-analyzer", "URL Analyzer"], ["health-check", "Cyber Health Check"], ["report-analyzer", "Security Report Analyzer"]].map(([id, t]) => (
+            {([["scam-detector", "Scam Detector"], ["url-analyzer", "URL Analyzer"], ["health-check", "Cyber Health Check"], ["report-analyzer", "Security Report Analyzer"]] as const).map(([id, t]) => (
               <li key={id}><Link to="/tools/$toolId" params={{ toolId: id }} className="font-semibold text-gold hover:underline">{t} →</Link></li>
             ))}
           </ul>
