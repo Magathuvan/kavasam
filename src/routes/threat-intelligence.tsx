@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { meta, Notice, PageShell } from "@/components/PageShell";
-import { getKev } from "@/lib/intel.functions";
+import { defang, FlagButton, useFlagCounts } from "@/components/FalsePositive";
+import { getKev, getPhish } from "@/lib/intel.functions";
 
 export const Route = createFileRoute("/threat-intelligence")({
   loader: async () => {
-    try { return { kev: await getKev() }; } catch { return { kev: null }; }
+    const [kev, phish] = await Promise.all([getKev().catch(() => null), getPhish().catch(() => null)]);
+    return { kev, phish };
   },
   head: () => meta("Threat Intelligence", "Live view of actively exploited vulnerabilities from the CISA Known Exploited Vulnerabilities catalog, plus threat categories and official Indian advisories."),
   component: Intel,
@@ -20,10 +22,12 @@ const categories = [
 ];
 
 function Intel() {
-  const { kev } = Route.useLoaderData();
+  const { kev, phish } = Route.useLoaderData();
+  const kevFlags = useFlagCounts("kev", kev?.recent.map((v) => v.cveID) ?? []);
+  const phishFlags = useFlagCounts("openphish", phish?.recent ?? []);
   const max = kev ? Math.max(...kev.months.map((m) => m.count), 1) : 1;
   return (
-    <PageShell eyebrow="Threat Intelligence" title="Understand the threats shaping the digital world." intro="Real, sourced data only. Vulnerability data below is pulled live from the CISA Known Exploited Vulnerabilities (KEV) catalog.">
+    <PageShell eyebrow="Threat Intelligence" title="Understand the threats shaping the digital world." intro="Real, sourced data only — refreshed every time this page loads. Vulnerabilities come from the CISA Known Exploited Vulnerabilities catalog; phishing URLs from the OpenPhish community feed. Spot a mistake? Flag it as a false positive.">
       {!kev ? (
         <Notice>The live threat feed couldn't be loaded right now. Please refresh in a few minutes.</Notice>
       ) : (
@@ -76,13 +80,40 @@ function Intel() {
                     <p className="font-semibold text-navy">{v.vulnerabilityName}</p>
                     <p className="text-xs text-tech">{v.vendorProject} · {v.product}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{v.shortDescription}</p>
+                    <FlagButton feed="kev" indicator={v.cveID} count={kevFlags.counts[v.cveID]} onFlagged={() => kevFlags.bump(v.cveID)} />
                   </div>
                 </li>
               ))}
             </ul>
-            <p className="border-t border-border p-6 text-xs text-muted-foreground">Source: CISA KEV catalog v{kev.catalogVersion}, released {kev.released.slice(0, 10)}. Severity details via NVD.</p>
+            <p className="border-t border-border p-6 text-xs text-muted-foreground">Source: CISA KEV catalog v{kev.catalogVersion}, released {kev.released.slice(0, 10)}. Severity details via NVD. Fetched {new Date(kev.fetchedAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST.</p>
           </section>
         </>
+      )}
+      {!phish ? (
+        <div className="mt-6"><Notice>The live phishing feed couldn't be loaded right now. Please refresh in a few minutes.</Notice></div>
+      ) : (
+        <section className="mt-6 grid gap-6 lg:grid-cols-[1fr_300px]">
+          <div className="rounded-xl border border-border">
+            <p className="eyebrow border-b border-border p-6 text-gold-deep">Live phishing URLs · {phish.total} currently active</p>
+            <p className="px-6 pt-4 text-xs text-muted-foreground">Links are defanged (hxxp, [.]) and not clickable — do not visit them.</p>
+            <ul className="divide-y divide-border">
+              {phish.recent.map((u) => (
+                <li key={u} className="px-6 py-4">
+                  <code className="break-all text-sm text-navy">{defang(u)}</code>
+                  <FlagButton feed="openphish" indicator={u} count={phishFlags.counts[u]} onFlagged={() => phishFlags.bump(u)} />
+                </li>
+              ))}
+            </ul>
+            <p className="border-t border-border p-6 text-xs text-muted-foreground">Source: OpenPhish community feed. Fetched {new Date(phish.fetchedAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST.</p>
+          </div>
+          <div className="rounded-xl bg-navy p-6 text-navy-foreground">
+            <p className="eyebrow text-gold">Most abused hosting domains</p>
+            <ul className="mt-5 space-y-3 text-sm">
+              {phish.topHosts.map(([h, c]) => <li key={h} className="flex justify-between gap-3"><span className="truncate">{h.replace(/\./g, "[.]")}</span><span className="text-gold">{c}</span></li>)}
+            </ul>
+            <p className="mt-6 text-xs text-navy-foreground/60">Attackers often abuse legitimate free hosting services; listing a domain here doesn't mean the service itself is malicious.</p>
+          </div>
+        </section>
       )}
       <section className="mt-16">
         <h2 className="text-2xl font-extrabold text-navy">Threat categories</h2>

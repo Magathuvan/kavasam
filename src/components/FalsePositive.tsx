@@ -25,7 +25,8 @@ export function FlagButton({ feed, indicator, count, onFlagged }: { feed: Feed; 
   const [reason, setReason] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const storeKey = `kv-flag:${feed}:${indicator}`;
-  const already = typeof window !== "undefined" && state === "idle" && localStorage.getItem(storeKey);
+  const [already, setAlready] = useState(false);
+  useEffect(() => { setAlready(!!localStorage.getItem(storeKey)); }, [storeKey]);
 
   async function send() {
     setState("sending");
