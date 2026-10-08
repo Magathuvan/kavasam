@@ -20,6 +20,7 @@ export const getKev = createServerFn({ method: "GET" }).handler(async () => {
     months.push({ month: key, count: vulns.filter((v) => v.dateAdded.startsWith(key)).length });
   }
   return {
+    fetchedAt: new Date().toISOString(),
     catalogVersion: data.catalogVersion,
     released: data.dateReleased,
     total: vulns.length,
@@ -37,3 +38,22 @@ export const checkHeaders = createServerFn({ method: "POST" })
     const { inspectUrl } = await import("./ai.server");
     return { report: await inspectUrl(data.url) };
   });
+
+export const getPhish = createServerFn({ method: "GET" }).handler(async () => {
+  const res = await fetch("https://openphish.com/feed.txt", { headers: { "user-agent": "KAVASAM/1.0" }, redirect: "follow" });
+  if (!res.ok) throw new Error("Phishing feed unavailable");
+  const urls = Array.from(new Set((await res.text()).split("\n").map((l) => l.trim()).filter((l) => /^https?:\/\//.test(l))));
+  const hosts: Record<string, number> = {};
+  for (const u of urls) {
+    try {
+      const h = new URL(u).hostname.split(".").slice(-2).join(".");
+      hosts[h] = (hosts[h] ?? 0) + 1;
+    } catch { /* skip */ }
+  }
+  return {
+    fetchedAt: new Date().toISOString(),
+    total: urls.length,
+    topHosts: Object.entries(hosts).sort((a, b) => b[1] - a[1]).slice(0, 6),
+    recent: urls.slice(0, 25),
+  };
+});
