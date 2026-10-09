@@ -25,5 +25,5 @@ export const navItems: NavItem[] = [
   },
   { label: "Threat Intelligence", href: "/threat-intelligence" },
   { label: "Learning", href: "/academy", children: [["KAVASAM Academy", "/academy"], ["Research", "/research"]] },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/about", children: [["About KAVASAM", "/about"], ["Team", "/team"], ["Contact", "/contact"], ["Responsible Disclosure", "/responsible-disclosure"]] },
 ];
