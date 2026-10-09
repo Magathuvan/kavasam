@@ -12,10 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ResponsibleDisclosureRouteImport } from './routes/responsible-disclosure'
 import { Route as SecurityToolsRouteImport } from './routes/security-tools'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as TeamRouteImport } from './routes/team'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ThreatIntelligenceRouteImport } from './routes/threat-intelligence'
 import { Route as AcademyIndexRouteImport } from './routes/academy.index'
 import { Route as AcademySlugRouteImport } from './routes/academy.$slug'
@@ -40,6 +44,16 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
   path: '/research',
@@ -58,6 +72,16 @@ const SecurityToolsRoute = SecurityToolsRouteImport.update({
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ThreatIntelligenceRoute = ThreatIntelligenceRouteImport.update({
@@ -105,10 +129,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/privacy': typeof PrivacyRoute
   '/research': typeof ResearchRoute
   '/responsible-disclosure': typeof ResponsibleDisclosureRoute
   '/security-tools': typeof SecurityToolsRoute
   '/solutions': typeof SolutionsRoute
+  '/team': typeof TeamRoute
+  '/terms': typeof TermsRoute
   '/threat-intelligence': typeof ThreatIntelligenceRoute
   '/academy/$slug': typeof AcademySlugRoute
   '/api/analyze': typeof ApiAnalyzeRoute
@@ -122,10 +150,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/privacy': typeof PrivacyRoute
   '/research': typeof ResearchRoute
   '/responsible-disclosure': typeof ResponsibleDisclosureRoute
   '/security-tools': typeof SecurityToolsRoute
   '/solutions': typeof SolutionsRoute
+  '/team': typeof TeamRoute
+  '/terms': typeof TermsRoute
   '/threat-intelligence': typeof ThreatIntelligenceRoute
   '/academy/$slug': typeof AcademySlugRoute
   '/api/analyze': typeof ApiAnalyzeRoute
@@ -140,10 +172,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
+  '/privacy': typeof PrivacyRoute
   '/research': typeof ResearchRoute
   '/responsible-disclosure': typeof ResponsibleDisclosureRoute
   '/security-tools': typeof SecurityToolsRoute
   '/solutions': typeof SolutionsRoute
+  '/team': typeof TeamRoute
+  '/terms': typeof TermsRoute
   '/threat-intelligence': typeof ThreatIntelligenceRoute
   '/academy/$slug': typeof AcademySlugRoute
   '/api/analyze': typeof ApiAnalyzeRoute
@@ -159,10 +195,14 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/cookies'
+    | '/privacy'
     | '/research'
     | '/responsible-disclosure'
     | '/security-tools'
     | '/solutions'
+    | '/team'
+    | '/terms'
     | '/threat-intelligence'
     | '/academy/$slug'
     | '/api/analyze'
@@ -176,10 +216,14 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/cookies'
+    | '/privacy'
     | '/research'
     | '/responsible-disclosure'
     | '/security-tools'
     | '/solutions'
+    | '/team'
+    | '/terms'
     | '/threat-intelligence'
     | '/academy/$slug'
     | '/api/analyze'
@@ -193,10 +237,14 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/cookies'
+    | '/privacy'
     | '/research'
     | '/responsible-disclosure'
     | '/security-tools'
     | '/solutions'
+    | '/team'
+    | '/terms'
     | '/threat-intelligence'
     | '/academy/$slug'
     | '/api/analyze'
@@ -211,10 +259,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
+  PrivacyRoute: typeof PrivacyRoute
   ResearchRoute: typeof ResearchRoute
   ResponsibleDisclosureRoute: typeof ResponsibleDisclosureRoute
   SecurityToolsRoute: typeof SecurityToolsRoute
   SolutionsRoute: typeof SolutionsRoute
+  TeamRoute: typeof TeamRoute
+  TermsRoute: typeof TermsRoute
   ThreatIntelligenceRoute: typeof ThreatIntelligenceRoute
   AcademySlugRoute: typeof AcademySlugRoute
   ApiAnalyzeRoute: typeof ApiAnalyzeRoute
@@ -248,6 +300,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/research': {
       id: '/research'
       path: '/research'
@@ -274,6 +340,20 @@ declare module '@tanstack/react-router' {
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/threat-intelligence': {
@@ -339,10 +419,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
+  PrivacyRoute: PrivacyRoute,
   ResearchRoute: ResearchRoute,
   ResponsibleDisclosureRoute: ResponsibleDisclosureRoute,
   SecurityToolsRoute: SecurityToolsRoute,
   SolutionsRoute: SolutionsRoute,
+  TeamRoute: TeamRoute,
+  TermsRoute: TermsRoute,
   ThreatIntelligenceRoute: ThreatIntelligenceRoute,
   AcademySlugRoute: AcademySlugRoute,
   ApiAnalyzeRoute: ApiAnalyzeRoute,
