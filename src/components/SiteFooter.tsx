@@ -1,7 +1,7 @@
 import logo from "@/assets/kavasam-logo.png.asset.json";
 
-const nav = [["Solutions", "/solutions"], ["AI Tools", "/tools"], ["Security Tools", "/security-tools"], ["Cyber Law", "/cyber-law"], ["Threat Intelligence", "/threat-intelligence"], ["Academy", "/academy"], ["Research", "/research"], ["About", "/about"], ["Contact", "/contact"]];
-const legal = [["Responsible Disclosure", "/responsible-disclosure"], ["Legal disclaimer", "/cyber-law"]];
+const nav = [["Solutions", "/solutions"], ["AI Tools", "/tools"], ["Security Tools", "/security-tools"], ["Cyber Law", "/cyber-law"], ["Threat Intelligence", "/threat-intelligence"], ["Academy", "/academy"], ["Research", "/research"], ["About", "/about"], ["Team", "/team"], ["Contact", "/contact"]];
+const legal = [["Privacy Policy", "/privacy"], ["Terms of Use", "/terms"], ["Cookie Policy", "/cookies"], ["Responsible Disclosure", "/responsible-disclosure"], ["Legal disclaimer", "/cyber-law"]];
 
 export function SiteFooter() {
   return (
